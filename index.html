@@ -915,7 +915,7 @@ discount from a university. In the example below, Pat receives an alumni
   <span class='comment'>// set the context, which establishes the special terms we will be using
   // such as 'issuer' and 'alumniOf'.</span>
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   <span class='comment'>// specify the identifier for the credential</span>
@@ -977,14 +977,14 @@ the <a>verifier</a> and <a>verified</a>.
         <pre class="example nohighlight" title="A simple example of a verifiable presentation">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "hhttps://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "type": "VerifiablePresentation",
   <span class='comment'>// the verifiable credential issued in the previous example</span>
   "verifiableCredential": [{
     "@context": [
-      "https://www.w3.org/2018/credentials/v1",
+      "https://www.w3.org/2021/credentials/v2",
       "https://www.w3.org/2018/credentials/examples/v1"
     ],
     "id": "http://example.edu/credentials/1872",
@@ -1116,7 +1116,7 @@ processors that support JSON-LD can process the <code>@context</code>
         <pre class="example nohighlight" title="Usage of the @context property">
 {
   <span class="highlight">"@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ]</span>,
   "id": "http://example.edu/credentials/58473",
@@ -1219,7 +1219,7 @@ about the <code>id</code>.
         <pre class="example nohighlight" title="Usage of the id property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   <span class="highlight">"id": "http://example.edu/credentials/3732"</span>,
@@ -1293,7 +1293,7 @@ in a document containing machine-readable information about the
         <pre class="example nohighlight" title="Usage of the type property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
@@ -1480,6 +1480,88 @@ Implementation Guidelines [[?VC-IMP-GUIDE]].
       </section>
 
       <section>
+        <h3>Name</h3>
+
+        <p>
+This specification defines the <code>name</code> <a>property</a> for
+expressing the human readable name for a <a>credential</a>.
+        </p>
+
+        <dl>
+          <dt><var>name</var></dt>
+          <dd>
+A <a>credential</a> MAY have a <code>name</code> <a>property</a>. The
+value of the <code>name</code> <a>property</a> MUST be a string value 
+representing the human readable name for the <a>credential</a>
+          </dd>
+        </dl>
+
+        <pre class="example nohighlight" title="Usage of name property">
+{
+  "@context": [
+    "https://www.w3.org/2021/credentials/v2",
+    "https://www.w3.org/2021/credentials/examples/v2"
+  ],
+  "id": "http://example.edu/credentials/3732",
+  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  <span class="highlight">"name": "University Degree Credential"</span>,
+  "description": "A university degree from example.edu",
+  "issuer": "https://example.edu/issuers/14",
+  "issuanceDate": "2010-01-01T19:23:24Z",
+  "credentialSubject": {
+    "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+    "degree": {
+      "type": "BachelorDegree",
+      "name": "Bachelor of Science and Arts"
+    }
+  },
+  "proof": { <span class="comment">...</span> }
+}
+        </pre>
+      </section>
+
+      <section>
+        <h3>Description</h3>
+
+        <p>
+This specification defines the <code>description</code> <a>property</a> for
+expressing a human readable description for a <a>credential</a>.
+        </p>
+
+        <dl>
+          <dt><var>description</var></dt>
+          <dd>
+A <a>credential</a> MAY have a <code>description</code> <a>property</a>. The
+value of the <code>description</code> <a>property</a> MUST be a string value 
+representing a human readable description for the <a>credential</a>.
+          </dd>
+        </dl>
+
+        <pre class="example nohighlight" title="Usage of name property">
+{
+  "@context": [
+    "https://www.w3.org/2021/credentials/v2",
+    "https://www.w3.org/2021/credentials/examples/v2"
+  ],
+  "id": "http://example.edu/credentials/3732",
+  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  <span class="highlight">"description": "A university degree from example.edu"</span>,
+  "issuer": "https://example.edu/issuers/14",
+  "issuanceDate": "2010-01-01T19:23:24Z",
+  "credentialSubject": {
+    "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+    "degree": {
+      "type": "BachelorDegree",
+      "name": "Bachelor of Science and Arts"
+    }
+  },
+  "proof": { <span class="comment">...</span> }
+}
+        </pre>
+      </section>
+
+      <section>
         <h3>Credential Subject</h3>
 
         <p>
@@ -1507,11 +1589,13 @@ a set of objects that contain one or more properties that are each related to a
         <pre class="example nohighlight" title="Usage of the credentialSubject property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://www.w3.org/2018/credentials/examples/v1"
+    "https://www.w3.org/2021/credentials/v2",
+    "https://www.w3.org/2021/credentials/examples/v2"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   <span class="highlight">"credentialSubject"</span>: {
     "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
     "degree": {
@@ -1533,11 +1617,13 @@ who are spouses. Note the use of array notation to associate multiple
         <pre class="example nohighlight" title="Specifying multiple subjects in a verifiable credential">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "RelationshipCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "credentialSubject": <span class="highlight">[{
     "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
     "name": "Jayden Doe",
@@ -1580,11 +1666,13 @@ machine-readable information about the <a>issuer</a> that can be used to
         <pre class="example nohighlight" title="Usage of issuer property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   <span class="highlight">"issuer": "https://example.edu/issuers/14"</span>,
   "issuanceDate": "2010-01-01T19:23:24Z",
   "credentialSubject": {
@@ -1606,11 +1694,13 @@ associating an object with the issuer property:
         <pre class="example nohighlight" title="Usage of issuer expanded property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   <span class="highlight">"issuer": {
     "id": "did:example:76e12ec712ebc6f1c221ebfeb1f",
     "name": "Example University"
@@ -1659,11 +1749,13 @@ becomes valid.
         <pre class="example nohighlight" title="Usage of issuanceDate property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu/issuers/14",
   <span class="highlight">"issuanceDate": "2010-01-01T19:23:24Z"</span>,
   "credentialSubject": {
@@ -1736,11 +1828,13 @@ the signing date. The example below uses RSA digital signatures.
           title="Usage of the proof property on a verifiable credential">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.gov/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu",
   "issuanceDate": "2010-01-01T19:73:24Z",
   "credentialSubject": {
@@ -1800,11 +1894,13 @@ date and time the <a>credential</a> ceases to be valid.
         <pre class="example nohighlight" title="Usage of the expirationDate property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu/issuers/14",
   "issuanceDate": "2010-01-01T19:23:24Z",
   <span class="highlight">"expirationDate": "2020-01-01T19:23:24Z"</span>,
@@ -1869,11 +1965,13 @@ privacy-enhancing.
         <pre class="example nohighlight" title="Usage of the status property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu/issuers/14",
   "issuanceDate": "2010-01-01T19:23:24Z",
   "credentialSubject": {
@@ -1960,7 +2058,7 @@ The example below shows a <a>verifiable presentation</a> that embeds
         <pre class="example nohighlight" title="Basic structure of a presentation">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "urn:uuid:3978344f-8596-4c3a-a978-8fcaba3903c5",
@@ -2291,7 +2389,7 @@ Let us assume we start with the <a>verifiable credential</a> shown below.
         <pre class="example nohighlight" title="A simple credential">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.com/credentials/4643",
@@ -2345,11 +2443,13 @@ example by including the context and adding the new <a>properties</a> and
           title="A verifiable credential with a custom extension">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     <span class="highlight">"https://example.com/contexts/mycontext.jsonld"</span>
   ],
   "id": "http://example.com/credentials/4643",
   "type": ["VerifiableCredential", "CustomExt12"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.com/issuers/14",
   "issuanceDate": "2018-02-24T05:28:04Z",
   <span class="highlight">"referenceNumber": 83294847,</span>
@@ -2510,11 +2610,13 @@ integrity protection mechanism. The <code>credentialSchema</code>
         <pre class="example nohighlight" title="Usage of the credentialSchema property to perform JSON schema validation">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu/issuers/14",
   "issuanceDate": "2010-01-01T19:23:24Z",
   "credentialSubject": {
@@ -2555,11 +2657,13 @@ see Section <a href="#zero-knowledge-proofs"></a>.
         <pre class="example nohighlight" title="Usage of the credentialSchema property to perform zero-knowledge validation">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu/issuers/14",
   "issuanceDate": "2010-01-01T19:23:24Z",
   "credentialSubject": {
@@ -2640,11 +2744,13 @@ determined by the specific <code>refreshService</code> <a>type</a> definition.
         <pre class="example nohighlight" title="Usage of the refreshService property by an issuer">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu/issuers/14",
   "issuanceDate": "2010-01-01T19:23:24Z",
   "credentialSubject": {
@@ -2719,11 +2825,13 @@ by the specific <code>termsOfUse</code> <a>type</a> definition.
         <pre class="example nohighlight" title="Usage of the termsOfUse property by an issuer">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu/issuers/14",
   "issuanceDate": "2010-01-01T19:23:24Z",
   "credentialSubject": {
@@ -2757,18 +2865,20 @@ in an archive.
         <pre class="example nohighlight" title="Usage of the termsOfUse property by a holder">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
   "type": ["VerifiablePresentation"],
   "verifiableCredential": [{
     "@context": [
-      "https://www.w3.org/2018/credentials/v1",
+      "https://www.w3.org/2021/credentials/v2",
       "https://www.w3.org/2018/credentials/examples/v1"
     ],
     "id": "http://example.edu/credentials/3732",
     "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+    "name": "University Degree Credential",
+    "description": "A university degree from example.edu",
     "issuer": "https://example.edu/issuers/14",
     "issuanceDate": "2010-01-01T19:23:24Z",
     "credentialSubject": {
@@ -2865,11 +2975,13 @@ Verifiable Credentials Implementation Guidelines [[VC-IMP-GUIDE]] document.
         <pre class="example nohighlight" title="Usage of the evidence property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   "issuer": "https://example.edu/issuers/14",
   "issuanceDate": "2010-01-01T19:23:24Z",
   "credentialSubject": {
@@ -2995,10 +3107,12 @@ the <a>verifiable credential</a> in a way that supports the privacy of the
         <pre class="example nohighlight" title="A verifiable credential that supports CL Signatures">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "name": "University Degree Credential",
+  "description": "A university degree from example.edu",
   <span class="highlight">"credentialSchema": {
     "id": "did:example:cdf:35LB7w9ueWbagPL94T9bMLtyXDj9pX5o",
     "type": "did:example:schema:22KpkXgecryx9k7N6XN1QoN3gXwBkSU8SfyyYQG"
@@ -3062,14 +3176,14 @@ that the <a>holder</a> did not intend to share.
         <pre class="example nohighlight" title="A verifiable presentation that supports CL Signatures">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "type": "VerifiablePresentation",
   "verifiableCredential": [
     {
       "@context": [
-        "https://www.w3.org/2018/credentials/v1",
+        "https://www.w3.org/2021/credentials/v2",
         "https://www.w3.org/2018/credentials/examples/v1"
       ],
       "type": ["VerifiableCredential", "UniversityDegreeCredential"],
@@ -3177,7 +3291,7 @@ can issue the <a>credential</a> shown below and present it to the
         <pre class="example nohighlight" title="A subject disputes a credential">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.com/credentials/123",
@@ -3707,7 +3821,7 @@ header parameter.
   "nonce": "660!6345FSer",
   "vc": {
     "@context": [
-      "https://www.w3.org/2018/credentials/v1",
+      "https://www.w3.org/2021/credentials/v2",
       "https://www.w3.org/2018/credentials/examples/v1"
     ],
     "type": ["VerifiableCredential", "UniversityDegreeCredential"],
@@ -3773,7 +3887,7 @@ header parameter.
   "nonce": "343s$FSFDa-",
   "vp": {
     "@context": [
-      "https://www.w3.org/2018/credentials/v1",
+      "https://www.w3.org/2021/credentials/v2",
       "https://www.w3.org/2018/credentials/examples/v1"
     ],
     "type": ["VerifiablePresentation"],
@@ -4190,7 +4304,7 @@ possible by not specifying the <a>subject</a> identifier, expressed using the
       <pre class="example nohighlight" title="Usage of issuer properties">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/temporary/28934792387492384",
@@ -4647,7 +4761,7 @@ probably should be:
       <pre class="example nohighlight" title="Non-content-integrity protected links">
 {
   "@context": [
-    <span class="highlight">"https://www.w3.org/2018/credentials/v1"</span>,
+    <span class="highlight">"https://www.w3.org/2021/credentials/v2"</span>,
     <span class="highlight">"https://www.w3.org/2018/credentials/examples/v1"</span>
   ],
   "id": "http://example.edu/credentials/58473",
@@ -4683,7 +4797,7 @@ protection to the image by using an [[IPFS]] link.
         <pre class="example nohighlight" title="Content-integrity protection for links to external data">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1<span class="highlight">?hl=z3aq31uzgnZBuWNzUB</span>",
+    "https://www.w3.org/2021/credentials/v2<span class="highlight">?hl=z3aq31uzgnZBuWNzUB</span>",
     "https://www.w3.org/2018/credentials/examples/v1<span class="highlight">?hl=z8guWNzUBnZBu3aq31</span>"
   ],
   "id": "http://example.edu/credentials/58473",
@@ -5438,7 +5552,7 @@ is also provided in this section.
 
     "proof": {"@id": "https://w3id.org/security#proof", "@type": "@id", "@container": "@graph"}
   }
-}
+}    
 </pre>
 
   </section>
@@ -5511,7 +5625,7 @@ is invalid.
           <pre class="example nohighlight" title="Usage of the nonTransferable property">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
@@ -5547,7 +5661,7 @@ and the <a>holder</a>.
 
         <pre class="example nohighlight" title="A credential uniquely identifying a subject">
 {
-  "@context": ["https://www.w3.org/2018/credentials/v1", "https://schema.org/"]
+  "@context": ["https://www.w3.org/2021/credentials/v2", "https://schema.org/"]
   "id": "http://example.edu/credentials/332",
   "type": ["VerifiableCredential", "IdentityCredential"],
   "issuer": "https://example.edu/issuers/4",
@@ -5635,7 +5749,7 @@ outside the scope of this specification.
 
         <pre class="example nohighlight" title="The relationship property in a child's credential">{
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
@@ -5662,7 +5776,7 @@ child and the parent such that a <a>verifier</a> would most likely accept the
 
         <pre class="example nohighlight" title="A relationship credential issued to a parent">{
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
@@ -5690,7 +5804,7 @@ provided with any of the child's <a>credentials</a>.
 
         <pre class="example nohighlight" title="A relationship credential issued by a child">{
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.org/credentials/23894",
@@ -5755,7 +5869,7 @@ these two <a>verifiable credentials</a> so that the <a>verifier</a> can
 verifiable credential that was passed to it by the subject">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "did:example:76e12ec21ebhyu1f712ebc6f1z2",
@@ -5763,7 +5877,7 @@ verifiable credential that was passed to it by the subject">
   "verifiableCredential": [
     {
      "@context": [
-       "https://www.w3.org/2018/credentials/v1",
+       "https://www.w3.org/2021/credentials/v2",
        "https://www.w3.org/2018/credentials/examples/v1"
       ],
       "id": "http://example.gov/credentials/3732",
@@ -5782,7 +5896,7 @@ verifiable credential that was passed to it by the subject">
     },
     {
       "@context": [
-        "https://www.w3.org/2018/credentials/v1",
+        "https://www.w3.org/2021/credentials/v2",
         "https://www.w3.org/2018/credentials/examples/v1"
       ],
       "id": "https://example.com/VC/123456789",
@@ -5848,7 +5962,7 @@ the subject of the credential, but who has a relationship with the issuer">
 
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2021/credentials/v2",
     "https://www.w3.org/2018/credentials/examples/v1"
   ],
   "id": "http://example.edu/credentials/3732",
